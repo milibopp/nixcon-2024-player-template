@@ -42,7 +42,7 @@ in
     systemd.services.webserver = {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      description = "The player webserver service";
+      description = "My player webserver service";
       script = lib.getExe cfg.webserver;
       environment = {
         PORT = "8080";
