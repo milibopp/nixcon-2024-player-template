@@ -25,8 +25,7 @@
               python = pkgs.python3.withPackages (ps: [ ps.flask ]);
               script = pkgs.writeText "main.py" (builtins.readFile ./main.py);
             in
-            pkgs.writeScriptBin "webserver" ''
-              #! /usr/bin/env sh
+            pkgs.writeShellScriptBin "webserver" ''
               ${python}/bin/python ${script}
             '';
           default = packages.webserver;
