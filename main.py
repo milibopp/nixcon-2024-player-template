@@ -11,4 +11,8 @@ def hello_world():
 def add(a, b):
     return str(a + b)
 
+@app.route("/mult/<int:a>/<int:b>")
+def mult(a, b):
+    return str(a * b)
+
 app.run(port=os.getenv("PORT", 8080))
