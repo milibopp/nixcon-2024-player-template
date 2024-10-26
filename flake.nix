@@ -20,7 +20,15 @@
       let pkgs = import nixpkgs { inherit system; };
       in rec {
         packages = {
-          webserver = pkgs.hello;
+          webserver =
+            let
+              python = pkgs.python3.withPackages (ps: [ ps.flask ]);
+              script = pkgs.writeText "main.py" (builtins.readFile ./main.py);
+            in
+            pkgs.writeScriptBin "webserver" ''
+              #! /usr/bin/env sh
+              ${python}/bin/python ${script}
+            '';
           default = packages.webserver;
         };
         apps.default = {
